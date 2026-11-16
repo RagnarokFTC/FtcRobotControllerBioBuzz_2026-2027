@@ -119,6 +119,7 @@ public class MotorConfig extends OpMode {
 
                 Xapertado = false;
                 ServoELegal1.setPosition(0);
+                ServoELegal2.setPosition(0);
 
                 Wait(200);
 
@@ -128,6 +129,7 @@ public class MotorConfig extends OpMode {
                 MaisouMenosServo = 1;
                 Calibrador();
                 ServoELegal1.setPosition(SettingPosition);
+                ServoELegal2.setPosition(SettingPosition);
 
                 Xapertado = true;
                 Wait(200);
@@ -197,6 +199,7 @@ public class MotorConfig extends OpMode {
             if (Xapertado){
                 SettingPosition = Math.min(SettingPosition + 0.05, 1);
                ServoELegal1.setPosition((SettingPosition) * MaisouMenosServo);
+                ServoELegal2.setPosition((SettingPosition) * MaisouMenosServo);
 
             }
             else{
@@ -209,6 +212,7 @@ public class MotorConfig extends OpMode {
             if (Xapertado){
                 SettingPosition = Math.max(SettingPosition - 0.05, 0);
                 ServoELegal1.setPosition(SettingPosition * MaisouMenosServo);
+                ServoELegal2.setPosition((SettingPosition) * MaisouMenosServo);
 
             }
             else{

@@ -1,27 +1,18 @@
 package org.firstinspires.ftc.teamcode.TeleOp.Decode.Debug;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Gamepad;
-import com.qualcomm.robotcore.hardware.Servo;
 
-@TeleOp(name = "MotorVerify", group = "OpMode")
-public class MotorVerify extends OpMode {
+@TeleOp(name = "MoveVerify", group = "OpMode")
+public class MoveVerify extends OpMode {
 
     private DcMotor MDT, MEF, MDF, MET;
-    private Servo ServoTeste0, ServoTeste1;
+
 
 
     @Override
     public void init() {
-
-        ServoTeste0 = hardwareMap.get(Servo.class, "ServoTeste0");
-        ServoTeste1 = hardwareMap.get(Servo.class, "ServoTeste1");
-
-        ServoTeste0.setDirection(Servo.Direction.FORWARD);
-        ServoTeste1.setDirection(Servo.Direction.REVERSE);
 
         MEF = hardwareMap.get(DcMotor.class, "LeftDriveUp");
         MET = hardwareMap.get(DcMotor.class, "LeftDriveDown");
@@ -39,9 +30,6 @@ public class MotorVerify extends OpMode {
         MDT.setDirection(DcMotor.Direction.FORWARD);
         MEF.setDirection(DcMotor.Direction.REVERSE);
         MET.setDirection(DcMotor.Direction.REVERSE);
-
-        ServoTeste0.setPosition(0.5);
-        ServoTeste1.setPosition(0.5);
 
     }
 
@@ -68,14 +56,7 @@ public class MotorVerify extends OpMode {
             MDT.setPower(0.5);
 
         }
-        if (gamepad2.dpad_right) {
-            ServoTeste0.setPosition(Math.min(ServoTeste0.getPosition() + 0.5, 1));
 
-        }
-        if (gamepad2.dpad_left) {
-            ServoTeste1.setPosition(Math.min(ServoTeste0.getPosition() + 0.5, 1));
-
-        }
 
     }
 
