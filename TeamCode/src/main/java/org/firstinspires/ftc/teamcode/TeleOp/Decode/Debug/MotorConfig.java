@@ -12,7 +12,7 @@ public class MotorConfig extends OpMode {
 
 //Definindo as variaveis
     private DcMotorEx MotorConfig1, MotorConfig2;
-    private Servo ServoELegal;
+    private Servo ServoELegal1, ServoELegal2;
     double SettingPower, SettingPosition;
     boolean Aapertado, Xapertado, Yapertado; // Quando o botão A, X e Y é apertado respectivamente
     int MaisouMenosMotor, MaisouMenosServo;
@@ -25,18 +25,26 @@ public class MotorConfig extends OpMode {
 
         MotorConfig2.setDirection(DcMotorEx.Direction.REVERSE);
 
-        ServoELegal = hardwareMap.get(Servo.class, "ServoDebug");
+        ServoELegal1 = hardwareMap.get(Servo.class, "ServoDebug1");
+        ServoELegal2 = hardwareMap.get(Servo.class, "ServoDebug2");
+
 //Definindo booleans
         Aapertado = false;
         Xapertado = true;
         Yapertado = false;
 
-
+        ServoELegal1.setDirection(Servo.Direction.FORWARD);
+        ServoELegal2.setDirection(Servo.Direction.REVERSE);
 
         SettingPosition = 0.5; // posição inicial do servo
         SettingPower = 0.5; // potencia inicial do motores
 
-        ServoELegal.setPosition(SettingPosition);
+        ServoELegal1.setPosition(SettingPosition);
+        ServoELegal2.setPosition(SettingPosition);
+
+        telemetry.addData("ATENÇÃO A POSIÇÃO DOS SERVOS E DOS MOTORES PARA NÃO GIRAREM AO CONTRÁRIO E QUEBRAR A PEÇA", "  Inicial o 1 é Forward e 2 é Reverse");
+
+
     }
 
     @Override
@@ -72,6 +80,7 @@ public class MotorConfig extends OpMode {
                 //Define a potência dos motores após realizar o calibração
                 MotorConfig1.setPower(SettingPower);
                 MotorConfig2.setPower(SettingPower);
+
                 Yapertado = true;// Y é considerado apertado
                 Wait(200);
 
@@ -109,7 +118,7 @@ public class MotorConfig extends OpMode {
             if (Xapertado) {
 
                 Xapertado = false;
-                ServoELegal.setPosition(0);
+                ServoELegal1.setPosition(0);
 
                 Wait(200);
 
@@ -118,7 +127,7 @@ public class MotorConfig extends OpMode {
 
                 MaisouMenosServo = 1;
                 Calibrador();
-                ServoELegal.setPosition(SettingPosition);
+                ServoELegal1.setPosition(SettingPosition);
 
                 Xapertado = true;
                 Wait(200);
@@ -187,7 +196,7 @@ public class MotorConfig extends OpMode {
 
             if (Xapertado){
                 SettingPosition = Math.min(SettingPosition + 0.05, 1);
-               ServoELegal.setPosition((SettingPosition) * MaisouMenosServo);
+               ServoELegal1.setPosition((SettingPosition) * MaisouMenosServo);
 
             }
             else{
@@ -199,7 +208,7 @@ public class MotorConfig extends OpMode {
 
             if (Xapertado){
                 SettingPosition = Math.max(SettingPosition - 0.05, 0);
-                ServoELegal.setPosition(SettingPosition * MaisouMenosServo);
+                ServoELegal1.setPosition(SettingPosition * MaisouMenosServo);
 
             }
             else{
@@ -220,7 +229,7 @@ public class MotorConfig extends OpMode {
 
         telemetry.addLine();
 
-        telemetry.addData("Posição do Servo", ServoELegal.getPosition());
+        telemetry.addData("Posição do Servo", ServoELegal1.getPosition());
         telemetry.addData("Posição configurada", SettingPosition);
 
         telemetry.addLine();
