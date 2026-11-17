@@ -29,7 +29,11 @@ public class Teste1 extends OpMode {
 
 
     public void initcamera(){
-        aprilTagProcessor = new AprilTagProcessor.Builder().build();
+        aprilTagProcessor = new AprilTagProcessor.Builder()
+                //Informações da camera aqui
+
+
+                .build();
 
 
 

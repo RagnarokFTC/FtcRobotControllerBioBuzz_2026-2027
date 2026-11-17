@@ -4,15 +4,24 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+
 @TeleOp(name = "MoveVerify", group = "OpMode")
 public class MoveVerify extends OpMode {
 
     private DcMotor MDT, MEF, MDF, MET;
 
+    private List Motores;
+
 
 
     @Override
     public void init() {
+      Motores = Arrays.asList(new DcMotor[]{MDT, MEF, MDF, MET});
+
 
         MEF = hardwareMap.get(DcMotor.class, "LeftDriveUp");
         MET = hardwareMap.get(DcMotor.class, "LeftDriveDown");
@@ -31,6 +40,7 @@ public class MoveVerify extends OpMode {
         MEF.setDirection(DcMotor.Direction.REVERSE);
         MET.setDirection(DcMotor.Direction.REVERSE);
 
+
     }
 
     @Override
@@ -44,20 +54,31 @@ public class MoveVerify extends OpMode {
             MEF.setPower(0.5);
 
         }
+        else {
+            MEF.setPower(0);
+        }
         if (gamepad1.x) {
             MET.setPower(0.5);
 
+        }
+        else {
+            MEF.setPower(0);
         }
         if (gamepad1.a) {
             MDF.setPower(0.5);
 
         }
+        else {
+            MEF.setPower(0);
+        }
         if (gamepad2.b) {
             MDT.setPower(0.5);
 
         }
-
-
+        else {
+            MEF.setPower(0);
+        }
+        
     }
 
 

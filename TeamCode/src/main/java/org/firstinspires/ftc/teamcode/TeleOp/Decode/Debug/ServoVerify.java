@@ -5,10 +5,12 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@TeleOp(name = "SensorVerify", group = "OpMode")
+@TeleOp(name = "ServorVerify", group = "OpMode")
 public class ServoVerify extends OpMode {
 
     private Servo ServoTeste0, ServoTeste1;
+
+    double inicialPosition;
 
 
     @Override
@@ -20,26 +22,30 @@ public class ServoVerify extends OpMode {
         ServoTeste0.setDirection(Servo.Direction.FORWARD);
         ServoTeste1.setDirection(Servo.Direction.REVERSE);
 
-        ServoTeste0.setPosition(0.5);
-        ServoTeste1.setPosition(0.5);
-
+        inicialPosition = 0.5;
     }
 
     @Override
     public void loop() {
-        Verificar();
+        Verificar(inicialPosition);
         Telemetria();
 
     }
-    public void Verificar(){
+    public void Verificar(double posicaoinicial){
 
         if (gamepad2.dpad_right) {
             ServoTeste0.setPosition(Math.min(ServoTeste0.getPosition() + 0.5, 1));
 
+        }else{
+            ServoTeste0.setPosition(posicaoinicial);
         }
+
+
         if (gamepad2.dpad_left) {
             ServoTeste1.setPosition(Math.min(ServoTeste0.getPosition() + 0.5, 1));
 
+        } else{
+            ServoTeste1.setPosition(posicaoinicial);
         }
 
     }
