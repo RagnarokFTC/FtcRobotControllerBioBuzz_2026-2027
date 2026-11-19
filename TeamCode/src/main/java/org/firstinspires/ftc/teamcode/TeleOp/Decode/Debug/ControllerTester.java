@@ -21,7 +21,6 @@ public class ControllerTester extends OpMode {
     @Override
     public void loop() {
 
-
             telemetry.addData("Gamepad1 A button", gamepad1.a);
             telemetry.addData("Gamepad1 X button", gamepad1.x);
             telemetry.addData("Gamepad1 Y button", gamepad1.y);
@@ -53,6 +52,9 @@ public class ControllerTester extends OpMode {
         telemetry.addData("Gamepad2 Analogico direito Y", gamepad2.right_stick_y);
     }
 }
+
+
+
 /*
 x =* 10 é a mesma coisa que x = x * 10
 && é a mesma coisa que and

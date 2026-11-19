@@ -8,6 +8,8 @@ import com.qualcomm.robotcore.hardware.Servo;
 @TeleOp(name = "ServorVerify", group = "OpMode")
 public class ServoVerify extends OpMode {
 
+
+
     private Servo ServoTeste0, ServoTeste1;
 
     double inicialPosition;
@@ -36,13 +38,14 @@ public class ServoVerify extends OpMode {
         if (gamepad2.dpad_right) {
             ServoTeste0.setPosition(Math.min(ServoTeste0.getPosition() + 0.5, 1));
 
+
         }else{
             ServoTeste0.setPosition(posicaoinicial);
         }
 
 
         if (gamepad2.dpad_left) {
-            ServoTeste1.setPosition(Math.min(ServoTeste0.getPosition() + 0.5, 1));
+            ServoTeste1.setPosition(Math.min(ServoTeste1.getPosition() + 0.5, 1));
 
         } else{
             ServoTeste1.setPosition(posicaoinicial);
