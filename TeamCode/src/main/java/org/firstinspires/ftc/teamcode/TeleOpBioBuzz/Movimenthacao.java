@@ -4,6 +4,7 @@ import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
@@ -54,6 +55,7 @@ public class Movimenthacao extends OpMode {
         MEF.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         MDT.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         MET.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
 
         imu = hardwareMap.get(IMU.class, "imu");
 
