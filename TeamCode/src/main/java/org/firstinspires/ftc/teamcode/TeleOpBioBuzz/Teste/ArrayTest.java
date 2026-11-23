@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.TeleOpBioBuzz;
+package org.firstinspires.ftc.teamcode.TeleOpBioBuzz.Teste;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;

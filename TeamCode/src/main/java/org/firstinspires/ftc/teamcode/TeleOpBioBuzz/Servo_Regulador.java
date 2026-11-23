@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.TeleOpBioBuzz;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -8,6 +9,7 @@ import com.sun.tools.javac.code.Type;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
+@TeleOp(name = "Servo_Regulador", group = "OpMode")
 public class Servo_Regulador extends OpMode {
 
     private Servo ServoDireita, ServoEsquerda;

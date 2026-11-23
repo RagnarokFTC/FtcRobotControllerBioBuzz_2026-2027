@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-@Disabled // "Invisibilizando" a programação no driver hub
+ // "Invisibilizando" a programação no driver hub
 @TeleOp(name = "Intake", group = "OpMode")
 public class IntakeBioBuzz extends OpMode {
 

@@ -22,7 +22,7 @@ public class OpopBioBuzz extends OpMode {
         movimenthacao = new Movimenthacao(hardwareMap,gamepad1,telemetry);
         intakeBioBuzz = new IntakeBioBuzz(hardwareMap,gamepad2);
         servoRegulador = new Servo_Regulador(hardwareMap,gamepad2,telemetry);
-
+        lancador = new Lancador(hardwareMap, gamepad2);
     }
 
     @Override
@@ -31,7 +31,7 @@ public class OpopBioBuzz extends OpMode {
         movimenthacao.Movimentar(deadzone, 0.6);
         intakeBioBuzz.controlIn(0.5);
         servoRegulador.ServoAction(1);
-
+        lancador.controlOut(0.6);
 
         Telemetria();
     }
@@ -40,7 +40,7 @@ public class OpopBioBuzz extends OpMode {
         telemetry.addData("Gamepad2 = start + B", " Controla os mecanismos do robô");
 
         telemetry.addLine();
-        
+
         movimenthacao.Telemetria();
 
         telemetry.addLine();
