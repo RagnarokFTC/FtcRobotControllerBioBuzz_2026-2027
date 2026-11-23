@@ -22,6 +22,7 @@ public class Movimenthacao extends OpMode {
     double PMDT, PMDF, PMET, PMEF;
     double X, Y;
     double G1LY_axial, G1LX_lateral;
+    double getOrientation;
 
 
     private ElapsedTime tempopassado;
@@ -30,6 +31,7 @@ public class Movimenthacao extends OpMode {
         this.hardwareMap = hardwareMap;
         this.gamepad1 = gamepad;
         this.telemetry = telemetry;
+        init();
     }
     @Override
     public void init() {
@@ -56,12 +58,16 @@ public class Movimenthacao extends OpMode {
         imu = hardwareMap.get(IMU.class, "imu");
 
         //Direção do ControlHub, ficar atento a isso
-        RevHubOrientationOnRobot.LogoFacingDirection logoFacingDirection = RevHubOrientationOnRobot.LogoFacingDirection.UP;
-        RevHubOrientationOnRobot.UsbFacingDirection usbFacingDirection = RevHubOrientationOnRobot.UsbFacingDirection.LEFT; //Pode mudar mais tarde
+        RevHubOrientationOnRobot.LogoFacingDirection logoFacingDirection = RevHubOrientationOnRobot.LogoFacingDirection.LEFT;
+        RevHubOrientationOnRobot.UsbFacingDirection usbFacingDirection = RevHubOrientationOnRobot.UsbFacingDirection.UP; //Pode mudar mais tarde
 
         RevHubOrientationOnRobot orientationOnRobot = new RevHubOrientationOnRobot(logoFacingDirection, usbFacingDirection);
 
         imu.initialize(new IMU.Parameters(orientationOnRobot));
+        imu.resetYaw();
+
+
+
 
         telemetry.addData("Aperta pra começar aí do  lado", "so clicar");
         telemetry.update();
@@ -71,9 +77,11 @@ public class Movimenthacao extends OpMode {
     public void loop() {
 
         Movimentar(0.1, 0.6);
-        Telemetria();
+        Telemetria(tempopassado);
+
     }
     public void Movimentar(double deadzone, double bindmax){
+        getOrientation = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES);
 
         YawPitchRollAngles orientation = imu.getRobotYawPitchRollAngles();
         double max; // valor que impede que as potências passem do máximo(1)
@@ -128,7 +136,7 @@ public class Movimenthacao extends OpMode {
         }
 
     }
-    public void Telemetria(){
+    public void Telemetria(ElapsedTime tempopassado){
 
         telemetry.addData("Tempo passado: ", tempopassado.toString());
 
@@ -147,7 +155,7 @@ public class Movimenthacao extends OpMode {
 
         telemetry.addData("RTG1", String.format("%.2f", gamepad1.right_trigger));
 
-        telemetry.addData("orientation (yaw)", String.format("%.2f", imu.getRobotYawPitchRollAngles()));
+        telemetry.addData("orientation (yaw)", String.format("%.2f", getOrientation));
         telemetry.addData("TicksFrente:",MDT.getCurrentPosition());
         telemetry.addData("TicksLado: ",MEF.getCurrentPosition());
         telemetry.update();
