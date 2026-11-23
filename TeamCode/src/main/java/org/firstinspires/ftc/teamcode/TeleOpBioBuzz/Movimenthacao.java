@@ -20,6 +20,9 @@ public class Movimenthacao extends OpMode {
 
     private DcMotor MDT, MDF, MET, MEF;
     double PMDT, PMDF, PMET, PMEF;
+    double X, Y;
+    double G1LY_axial, G1LX_lateral;
+
 
     private ElapsedTime tempopassado;
     private IMU imu;
@@ -67,10 +70,10 @@ public class Movimenthacao extends OpMode {
     @Override
     public void loop() {
 
-        Movimentar(0.1);
+        Movimentar(0.1, 0.6);
         Telemetria();
     }
-    public void Movimentar(double deadzone){
+    public void Movimentar(double deadzone, double bindmax){
 
         YawPitchRollAngles orientation = imu.getRobotYawPitchRollAngles();
         double max; // valor que impede que as potências passem do máximo(1)
@@ -84,12 +87,12 @@ public class Movimenthacao extends OpMode {
             telemetry.update();
         }
 
-        double G1LY_axial   = -gamepad1.left_stick_y;  // obs: está negativo pois o valor para frente é invertido por padrão
-        double G1LX_lateral =  gamepad1.left_stick_x;
+         G1LY_axial   = -gamepad1.left_stick_y;  // obs: está negativo pois o valor para frente é invertido por padrão
+         G1LX_lateral =  gamepad1.left_stick_x;
         double G1RX_yaw     =  gamepad1.right_stick_x;
 
-       double X = G1LX_lateral * Math.cos(-orientation.getYaw(AngleUnit.RADIANS)) - G1LY_axial * Math.sin(-orientation.getYaw(AngleUnit.RADIANS));
-       double Y = G1LX_lateral * Math.sin(-orientation.getYaw(AngleUnit.RADIANS)) + G1LY_axial * Math.cos(-orientation.getYaw(AngleUnit.RADIANS));
+        X = G1LX_lateral * Math.cos(-orientation.getYaw(AngleUnit.RADIANS)) - G1LY_axial * Math.sin(-orientation.getYaw(AngleUnit.RADIANS));
+        Y = G1LX_lateral * Math.sin(-orientation.getYaw(AngleUnit.RADIANS)) + G1LY_axial * Math.cos(-orientation.getYaw(AngleUnit.RADIANS));
 
         max = Math.max(Math.abs(Y) + Math.abs(X) + Math.abs(G1RX_yaw), 1);
 
@@ -99,10 +102,18 @@ public class Movimenthacao extends OpMode {
         PMDT = Y + X - G1RX_yaw/ max;
 
         if ((Math.abs(G1LY_axial) > deadzone) || (Math.abs(G1LX_lateral) > deadzone) || (Math.abs(G1RX_yaw) > deadzone)) {
-            MDT.setPower(PMDT);
-            MDF.setPower(PMDF);
-            MEF.setPower(PMEF);
-            MET.setPower(PMET);
+            if (gamepad1.right_trigger > 0.1) {
+
+                MEF.setPower(PMEF * bindmax);
+                MET.setPower(PMET * bindmax);
+                MDF.setPower(PMDF * bindmax);
+                MDT.setPower(PMDT * bindmax);
+            } else {
+                MDT.setPower(PMDT);
+                MDF.setPower(PMDF);
+                MEF.setPower(PMEF);
+                MET.setPower(PMET);
+            }
         }
         else {
             MDT.setPower(0);
@@ -119,9 +130,26 @@ public class Movimenthacao extends OpMode {
     }
     public void Telemetria(){
 
-        telemetry.clearAll();
-
         telemetry.addData("Tempo passado: ", tempopassado.toString());
+
+        telemetry.addLine();
+
+        telemetry.addData("PMEF", String.format("%.2f", PMEF));
+        telemetry.addData("PMET", String.format("%.2f", PMET));
+        telemetry.addData("PMDF", String.format("%.2f", PMDF));
+        telemetry.addData("PMDT", String.format("%.2f", PMDT));
+
+        telemetry.addData("rotY", String.format("%.2f", Y));
+        telemetry.addData("rotX", String.format("%.2f", X));
+
+        telemetry.addData("G1LY", String.format("%.2f", G1LY_axial));
+        telemetry.addData("G1LX", String.format("%.2f", G1LX_lateral));
+
+        telemetry.addData("RTG1", String.format("%.2f", gamepad1.right_trigger));
+
+        telemetry.addData("orientation (yaw)", String.format("%.2f", imu.getRobotYawPitchRollAngles()));
+        telemetry.addData("TicksFrente:",MDT.getCurrentPosition());
+        telemetry.addData("TicksLado: ",MEF.getCurrentPosition());
         telemetry.update();
     }
 
