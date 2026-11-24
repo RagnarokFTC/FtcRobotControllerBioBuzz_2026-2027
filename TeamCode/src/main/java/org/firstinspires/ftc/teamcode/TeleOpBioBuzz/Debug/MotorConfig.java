@@ -230,33 +230,31 @@ public class MotorConfig extends OpMode {
     public void ReverseMotorServo(){
 
 
-        if (gamepad2.b && !SetinhaBaixoApertado){
-            if (!Bapertado) {
-                Bapertado = true;
-                MotorConfig2.setDirection(DcMotorSimple.Direction.FORWARD);
-                Wait(200);
-            }
+        if (gamepad2.b && !gamepad2.start){
             if (Bapertado) {
                 Bapertado = false;
                 MotorConfig2.setDirection(DcMotorSimple.Direction.REVERSE);
                 Wait(200);
             }
-        }
-
-        if (gamepad2.dpad_down && !Bapertado){
-            if (!SetinhaBaixoApertado){
-                SetinhaBaixoApertado = true;
-                ServoELegal2.setDirection(Servo.Direction.FORWARD);
+            else if (!Bapertado) {
+                Bapertado = true;
+                MotorConfig2.setDirection(DcMotorSimple.Direction.FORWARD);
                 Wait(200);
             }
+        }
+
+        if (gamepad2.dpad_down){
             if (SetinhaBaixoApertado){
                 SetinhaBaixoApertado = false;
                 ServoELegal2.setDirection(Servo.Direction.REVERSE);
                 Wait(200);
             }
+            else if (!SetinhaBaixoApertado){
+                SetinhaBaixoApertado = true;
+                ServoELegal2.setDirection(Servo.Direction.FORWARD);
+                Wait(200);
+            }
         }
-
-
 
     }
 
@@ -279,13 +277,14 @@ public class MotorConfig extends OpMode {
 
         telemetry.addData("Para o motor ter a potencia positiva", "aperte botão Y");
         telemetry.addData("Para o motor ter a potencia negativa", "aperte botão A");
+        telemetry.addData("Reverter a direção do motor", " aperte B");
         telemetry.addData("Para diminuir o falor do Poder configurado do Motor", "aperta LB");
         telemetry.addData("Para aumentar o falor do Poder configurado do Motor", "aperta RB");
         telemetry.addData("-----------------","-----------------");
         telemetry.addData("Para o Servo ir para a posição positiva", "aperte X");
         telemetry.addData("Para diminuir o falor do Poder configurado do Servo", "aperta Setinha Esquerda");
         telemetry.addData("Para aumentar o falor do Poder configurado do Servo", "aperta Setinha Direita");
-
+        telemetry.addData("Reverter a direção do servo", " aperte Setinha Baixo");
 
 
 

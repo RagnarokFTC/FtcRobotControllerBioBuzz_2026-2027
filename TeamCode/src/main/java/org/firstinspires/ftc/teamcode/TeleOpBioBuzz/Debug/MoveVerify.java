@@ -50,15 +50,15 @@ public class MoveVerify extends OpMode {
         if (gamepad1.y){
             MEF.setPower(0.5);
 
-        }if (gamepad1.x) {
+        }else if (gamepad1.x) {
             MET.setPower(0.5);
 
         }
-        if (gamepad1.a) {
+        else if (gamepad1.a) {
             MDF.setPower(0.5);
 
         }
-        if (gamepad1.b) {
+        else if (gamepad1.b) {
             MDT.setPower(0.5);
 
         }
