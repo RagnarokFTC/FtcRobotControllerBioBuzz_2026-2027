@@ -14,14 +14,11 @@ public class MoveVerify extends OpMode {
 
     private DcMotor MDT, MEF, MDF, MET;
 
-    private List Motores;
 
 
 
     @Override
     public void init() {
-      Motores = Arrays.asList(new DcMotor[]{MDT, MEF, MDF, MET});
-
 
         MEF = hardwareMap.get(DcMotor.class, "LeftDriveUp");
         MET = hardwareMap.get(DcMotor.class, "LeftDriveDown");
@@ -61,12 +58,15 @@ public class MoveVerify extends OpMode {
             MDF.setPower(0.5);
 
         }
-        if (gamepad2.b) {
+        if (gamepad1.b) {
             MDT.setPower(0.5);
 
         }
         else {
             MEF.setPower(0);
+            MET.setPower(0);
+            MDF.setPower(0);
+            MDT.setPower(0);
         }
         
     }

@@ -35,7 +35,7 @@ public class Lancador extends OpMode {
         Lancador = hardwareMap.get(DcMotor.class, "Lancador");
 
         // Definindo a direção dos motores
-        Lancador.setDirection(DcMotor.Direction.FORWARD);
+        Lancador.setDirection(DcMotor.Direction.REVERSE);
 
 
         // Resetando e fazendo com que os motores não usem seu Encoder

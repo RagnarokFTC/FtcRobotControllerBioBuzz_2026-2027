@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp(name = "MotorConfig", group = "Debug")
@@ -14,7 +15,7 @@ public class MotorConfig extends OpMode {
     private DcMotorEx MotorConfig1, MotorConfig2;
     private Servo ServoELegal1, ServoELegal2;
     double SettingPower, SettingPosition;
-    boolean Aapertado, Xapertado, Yapertado; // Quando o botão A, X e Y é apertado respectivamente
+    boolean Aapertado, Xapertado, Yapertado, Bapertado, SetinhaBaixoApertado; // Quando o botão A, X e Y é apertado respectivamente
     int MaisouMenosMotor, MaisouMenosServo;
 
     @Override
@@ -32,6 +33,8 @@ public class MotorConfig extends OpMode {
         Aapertado = false;
         Xapertado = true;
         Yapertado = false;
+        Bapertado = false;
+        SetinhaBaixoApertado = false;
 
         ServoELegal1.setDirection(Servo.Direction.FORWARD);
         ServoELegal2.setDirection(Servo.Direction.REVERSE);
@@ -52,6 +55,7 @@ public class MotorConfig extends OpMode {
 
 
         Calibrador(); // ativa a função dos calibradores
+        ReverseMotorServo();
         Telemetry(); // ativa o sistema de telemetria
         /*Motor:
         Gamepad2.Y = sentido horário do motor
@@ -223,6 +227,39 @@ public class MotorConfig extends OpMode {
 
 
     }
+    public void ReverseMotorServo(){
+
+
+        if (gamepad2.b && !SetinhaBaixoApertado){
+            if (!Bapertado) {
+                Bapertado = true;
+                MotorConfig2.setDirection(DcMotorSimple.Direction.FORWARD);
+                Wait(200);
+            }
+            if (Bapertado) {
+                Bapertado = false;
+                MotorConfig2.setDirection(DcMotorSimple.Direction.REVERSE);
+                Wait(200);
+            }
+        }
+
+        if (gamepad2.dpad_down && !Bapertado){
+            if (!SetinhaBaixoApertado){
+                SetinhaBaixoApertado = true;
+                ServoELegal2.setDirection(Servo.Direction.FORWARD);
+                Wait(200);
+            }
+            if (SetinhaBaixoApertado){
+                SetinhaBaixoApertado = false;
+                ServoELegal2.setDirection(Servo.Direction.REVERSE);
+                Wait(200);
+            }
+        }
+
+
+
+    }
+
     public void Telemetry(){ // Parte do código que é possível verificar algumas informações sobre os motores e os servos
 
         telemetry.addData("Potencia do motor1", MotorConfig1.getPower());
@@ -230,11 +267,13 @@ public class MotorConfig extends OpMode {
         telemetry.addData("Velocidade do motor2", MotorConfig2.getPower());
         telemetry.addData("Ticks do motor2", MotorConfig2.getCurrentPosition());
         telemetry.addData("Poder configurado", SettingPower);
+        telemetry.addData("Direção do 2° Motor", MotorConfig2.getDirection());
 
         telemetry.addLine();
 
         telemetry.addData("Posição do Servo", ServoELegal1.getPosition());
         telemetry.addData("Posição configurada", SettingPosition);
+        telemetry.addData("Direção do 2° Servo", ServoELegal2.getDirection());
 
         telemetry.addLine();
 
@@ -246,6 +285,8 @@ public class MotorConfig extends OpMode {
         telemetry.addData("Para o Servo ir para a posição positiva", "aperte X");
         telemetry.addData("Para diminuir o falor do Poder configurado do Servo", "aperta Setinha Esquerda");
         telemetry.addData("Para aumentar o falor do Poder configurado do Servo", "aperta Setinha Direita");
+
+
 
 
     }

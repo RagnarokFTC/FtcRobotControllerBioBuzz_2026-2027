@@ -34,10 +34,10 @@ public class Servo_Regulador extends OpMode {
         ServoDireita = hardwareMap.get(Servo.class, "ServoDireita");
         ServoEsquerda = hardwareMap.get(Servo.class, "ServoEsquerda");
 
-        ServoDireita.setDirection(Servo.Direction.FORWARD);
-        ServoEsquerda.setDirection(Servo.Direction.REVERSE);
+        ServoDireita.setDirection(Servo.Direction.REVERSE);
+        ServoEsquerda.setDirection(Servo.Direction.FORWARD);
 
-        posicaoinicial = 0.5;
+        posicaoinicial = 0.0;
         A_pressionado = true;
     }
 
