@@ -56,8 +56,8 @@ public class MoveVerify extends OpMode {
         }
         else if (gamepad1.a) {
             MDF.setPower(0.5);
-
         }
+
         else if (gamepad1.b) {
             MDT.setPower(0.5);
 

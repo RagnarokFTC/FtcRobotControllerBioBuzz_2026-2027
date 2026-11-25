@@ -11,7 +11,6 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 public class OpopBioBuzz extends OpMode {
 
     private Movimenthacao movimenthacao;
-
     private IntakeBioBuzz intakeBioBuzz;
     private Servo_Regulador servoRegulador;
     private Lancador lancador;
