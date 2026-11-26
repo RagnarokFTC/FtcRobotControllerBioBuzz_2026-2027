@@ -14,6 +14,8 @@ public class OpopBioBuzz extends OpMode {
     private IntakeBioBuzz intakeBioBuzz;
     private Servo_Regulador servoRegulador;
     private Lancador lancador;
+    private RampaPolen rampaPolen;
+    private Barreira barreira;
     private ElapsedTime runtime = new ElapsedTime();
 
 
@@ -34,9 +36,9 @@ public class OpopBioBuzz extends OpMode {
     public void loop() {
         deadzone = 0.1;
         movimenthacao.Movimentar(deadzone, 0.6);
-        intakeBioBuzz.controlIn(0.5);
+        intakeBioBuzz.controlIn(0.6);
         servoRegulador.ServoAction(1);
-        lancador.controlOut(0.6);
+        lancador.controlOut(0.8);
 
 
         Telemetria();

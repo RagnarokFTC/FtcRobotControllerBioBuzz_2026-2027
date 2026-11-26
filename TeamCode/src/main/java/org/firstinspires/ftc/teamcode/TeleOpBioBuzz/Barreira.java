@@ -4,8 +4,8 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@TeleOp (name= "barreira", group = "OpMode")
-public class barreira  extends OpMode {
+@TeleOp (name= "Barreira", group = "OpMode")
+public class Barreira extends OpMode {
     private Servo barreira;
     boolean B_pressionado;
 
@@ -21,9 +21,9 @@ public class barreira  extends OpMode {
     @Override
     public void loop() {
 
-        B();
+        B_barreira();
     }
-    public void B(){
+    public void B_barreira(){
         if (gamepad2.b){
             if (!B_pressionado) {
                 barreira.setPosition(1);

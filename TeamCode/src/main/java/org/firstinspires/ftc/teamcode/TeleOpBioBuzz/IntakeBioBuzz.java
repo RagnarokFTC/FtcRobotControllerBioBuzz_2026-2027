@@ -33,7 +33,7 @@ public class IntakeBioBuzz extends OpMode {
         // Definindo a variável do motor como o motor do hardwareMap
         Intake = hardwareMap.get(DcMotor.class, "Intake");
         // Definindo a direção do motor
-        Intake.setDirection(DcMotor.Direction.FORWARD);
+        Intake.setDirection(DcMotor.Direction.REVERSE);
 
         // Resetando e fazendo com que o motore não use seu Encoder
         Intake.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
