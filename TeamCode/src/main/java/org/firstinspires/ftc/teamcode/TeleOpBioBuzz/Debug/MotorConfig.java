@@ -7,6 +7,8 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
+
 @TeleOp(name = "MotorConfig", group = "Debug")
 
 public class MotorConfig extends OpMode {
@@ -288,10 +290,13 @@ public class MotorConfig extends OpMode {
         telemetry.addData("-----------------","-----------------");
         telemetry.addData("Potencia do motor1", MotorConfig1.getPower());
         telemetry.addData("Ticks do motor1", MotorConfig1.getCurrentPosition());
+        telemetry.addData("Corrente do motor1", MotorConfig1.getCurrent(CurrentUnit.MILLIAMPS));
         telemetry.addData("Velocidade do motor2", MotorConfig2.getPower());
         telemetry.addData("Ticks do motor2", MotorConfig2.getCurrentPosition());
-        telemetry.addData("Poder configurado", SettingPower);
+        telemetry.addData("Corrente do motor2", MotorConfig1.getCurrent(CurrentUnit.MILLIAMPS));
         telemetry.addData("Direção do 2° Motor", MotorConfig2.getDirection());
+        telemetry.addData("Poder configurado", SettingPower);
+
 
         telemetry.addLine();
 

@@ -55,5 +55,9 @@ public class OpopBioBuzz extends OpMode {
 
         servoRegulador.TelemetryServo();
 
+        telemetry.addLine();
+
+        lancador.TelemetriaLancador();
+
     }
 }

@@ -4,16 +4,19 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+
+import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
 
 
 @TeleOp(name = "Lancador", group = "OpMode")
 public class Lancador extends OpMode {
 
     // Declarando as variáveis como os motores e o gamepad
-    private DcMotor Lancador;
+    private DcMotorEx Lancador;
 
 
     private HardwareMap hardwareMap; // Importando o hardwareMap para usarmos os motores
@@ -32,7 +35,7 @@ public class Lancador extends OpMode {
     public void init() {
 
         // Definindo as variáveis dos motores como os motores do hardwareMap
-        Lancador = hardwareMap.get(DcMotor.class, "Lancador");
+        Lancador = hardwareMap.get(DcMotorEx.class, "Lancador");
 
         // Definindo a direção dos motores
         Lancador.setDirection(DcMotor.Direction.REVERSE);
@@ -44,6 +47,8 @@ public class Lancador extends OpMode {
 
         // Definindo para que toda a vez que o motor pare, ele dê Brake
         Lancador.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+
     }
 
     @Override
@@ -56,11 +61,16 @@ public class Lancador extends OpMode {
     public void controlOut(double PowUp) {
         if (gamepad2.right_trigger > 0.3) { // Se o RT estiver pressionado
             Lancador.setPower(PowUp); // O outtake começa a girar
-
         }
         else { // Se o RT não estiver pressionado
             Lancador.setPower(0);// Os motores param e Brekam
             Lancador.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         }
+    }
+
+    public void TelemetriaLancador(){
+
+        telemetry.addData("Corrente do Motor do Lançador", Lancador.getCurrent(CurrentUnit.MILLIAMPS));
+
     }
 }

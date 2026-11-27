@@ -1,12 +1,13 @@
 package org.firstinspires.ftc.teamcode.Camera;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
 
-
+@TeleOp(name = "CamTest", group = "OpMode")
 public class Teste1 extends OpMode {
 
 

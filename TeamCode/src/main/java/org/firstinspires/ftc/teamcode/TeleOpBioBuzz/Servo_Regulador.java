@@ -67,6 +67,7 @@ public class Servo_Regulador extends OpMode {
     }
 
     public void TelemetryServo(){
+
         telemetry.addData("Botão dos Servos", ServoDireita.getController());
 
         telemetry.addLine();

@@ -160,7 +160,7 @@ public class Movimenthacao extends OpMode {
         telemetry.addData("orientation (yaw)", String.format("%.2f", getOrientation));
         telemetry.addData("TicksFrente:",MDT.getCurrentPosition());
         telemetry.addData("TicksLado: ",MEF.getCurrentPosition());
-        telemetry.update();
+
     }
 
 }
