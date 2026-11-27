@@ -28,6 +28,12 @@ public class MotorConfig extends OpMode {
 
         MotorConfig2.setDirection(DcMotorEx.Direction.REVERSE);
 
+        MotorConfig1.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        MotorConfig2.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+
+        MotorConfig1.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        MotorConfig2.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+
         ServoELegal1 = hardwareMap.get(Servo.class, "ServoDebug1");
         ServoELegal2 = hardwareMap.get(Servo.class, "ServoDebug2");
 
@@ -291,7 +297,7 @@ public class MotorConfig extends OpMode {
         telemetry.addData("Potencia do motor1", MotorConfig1.getPower());
         telemetry.addData("Ticks do motor1", MotorConfig1.getCurrentPosition());
         telemetry.addData("Corrente do motor1", MotorConfig1.getCurrent(CurrentUnit.MILLIAMPS));
-        telemetry.addData("Velocidade do motor2", MotorConfig2.getPower());
+        telemetry.addData("Potência do motor2", MotorConfig2.getPower());
         telemetry.addData("Ticks do motor2", MotorConfig2.getCurrentPosition());
         telemetry.addData("Corrente do motor2", MotorConfig1.getCurrent(CurrentUnit.MILLIAMPS));
         telemetry.addData("Direção do 2° Motor", MotorConfig2.getDirection());
