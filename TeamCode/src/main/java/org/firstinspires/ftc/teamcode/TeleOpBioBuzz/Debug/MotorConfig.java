@@ -24,11 +24,8 @@ public class MotorConfig extends OpMode {
     int MaisouMenosMotor, MaisouMenosServo;
 
     //Ticks Por Segundo
-    double Velocidade1 = MotorConfig1.getVelocity();
-    double RPM1 = (Velocidade1 * 60)/ TicksperRevolutionHDHEX;
-
-    double Velocidade2 = MotorConfig2.getVelocity();
-    double RPM2 = Velocidade2 * 60/ TicksperRevolutionHDHEX;
+    double Velocidade1, Velocidade2;
+    double RPM1, RPM2;
 
     @Override
     public void init() {
@@ -59,6 +56,13 @@ public class MotorConfig extends OpMode {
         BapertadoServo = false;
 
         start = false;
+
+        Velocidade1 = MotorConfig1.getVelocity();
+        Velocidade2 = MotorConfig2.getVelocity();
+
+        RPM1 = (Velocidade1 * 60)/ TicksperRevolutionHDHEX;
+        RPM2 = (Velocidade2 * 60)/ TicksperRevolutionHDHEX;
+
         ServoELegal1.setDirection(Servo.Direction.FORWARD);
         ServoELegal2.setDirection(Servo.Direction.REVERSE);
 
@@ -135,12 +139,14 @@ public class MotorConfig extends OpMode {
                 //Verifica entre dois número o modulo da potência do motor +0.05 e o número 0 e pega o menor entre ele
                 MotorConfig1.setPower(Math.min(Math.abs(MotorConfig1.getPower()) + 0.05, 1) * MaisouMenosMotor);
                 SettingPower1 = MaisSettingPower1;//MaisSettingPower é alto explicativo e está um pouco mais acima a definição dele
+                    Wait(200);
                 }
 
                 if (gamepad2.dpad_right) {
 
                     MotorConfig2.setPower(Math.min(Math.abs(MotorConfig2.getPower()) + 0.05, 1) * MaisouMenosMotor);
                     SettingPower2 = MaisSettingPower2; //garante que a potência colocada no motor seja a mesmo da variavel
+                    Wait(200);
                 }
 
                 if (!gamepad2.dpad_left && !gamepad2.dpad_right) {
@@ -148,18 +154,22 @@ public class MotorConfig extends OpMode {
                     MotorConfig2.setPower(Math.min(Math.abs(MotorConfig2.getPower()) + 0.05, 1) * MaisouMenosMotor);
                     SettingPower1 = MaisSettingPower1;
                     SettingPower2 = MaisSettingPower2;
+                    Wait(200);
                 }
 
             } else {
                 if (gamepad2.dpad_left) {
                     SettingPower1 = MaisSettingPower1;//Caso o motor não esteja ligado ele aumenta a variavel
+                    Wait(200);
                 }
                 if (gamepad2.dpad_right){
                     SettingPower2 = MaisSettingPower2;
+                    Wait(200);
                 }
                 if (!gamepad2.dpad_right && !gamepad2.dpad_left){
                     SettingPower1 = MaisSettingPower1;
                     SettingPower2 = MaisSettingPower2;
+                    Wait(200);
                 }
             }
             Wait(200);
@@ -171,11 +181,13 @@ public class MotorConfig extends OpMode {
                     //Verifica entre dois número o modulo da potência do motor -0.05 e o número 0 e pega o maior entre ele
                     MotorConfig1.setPower(Math.max(Math.abs(MotorConfig1.getPower()) - 0.05, 0) * MaisouMenosMotor);
                     SettingPower1 = MenosSettingPower1; //MenosSettingPower é alto explicativo e está um pouco mais acima a definição dele
+                    Wait(200);
                 }
 
                 if (gamepad2.dpad_right) {
                     MotorConfig2.setPower(Math.max(Math.abs(MotorConfig2.getPower()) - 0.05, 0) * MaisouMenosMotor);
                     SettingPower2 = MenosSettingPower2;
+                    Wait(200);
                 }
 
                 if (!gamepad2.dpad_left && !gamepad2.dpad_right){
@@ -183,19 +195,23 @@ public class MotorConfig extends OpMode {
                     MotorConfig2.setPower(Math.max(Math.abs(MotorConfig2.getPower()) - 0.05, 0) * MaisouMenosMotor);
                     SettingPower1 = MenosSettingPower1;
                     SettingPower2 = MenosSettingPower2;
+                    Wait(200);
                 }
 
             } else {
                 //Caso o motor não esteja ligado ele diminui a variavel
                 if (gamepad2.dpad_left) {
                     SettingPower1 = MenosSettingPower1;
+                    Wait(200);
                 }
                 if (gamepad2.dpad_right){
                     SettingPower2 = MenosSettingPower2;
+                    Wait(200);
                 }
                 if (!gamepad2.dpad_right && !gamepad2.dpad_left){
                     SettingPower1 = MenosSettingPower1;
                     SettingPower2 = MenosSettingPower2;
+                    Wait(200);
                 }
             }
             Wait(200);
@@ -206,6 +222,7 @@ public class MotorConfig extends OpMode {
             SettingPower1 = SettingPower2 = 0.5;
             MotorConfig1.setPower(SettingPower1 * MaisouMenosMotor);
             MotorConfig2.setPower(SettingPower2 * MaisouMenosMotor);
+            Wait(1000);
         }
 
     }
@@ -227,11 +244,13 @@ public class MotorConfig extends OpMode {
                 if (gamepad1.dpad_left) {
                     SettingPosition1 = MaisSettingPosition1;
                     ServoELegal1.setPosition((SettingPosition1) * MaisouMenosServo);
+                    Wait(200);
                 }
 
                 if (gamepad1.dpad_right) {
                     ServoELegal2.setPosition((SettingPosition2) * MaisouMenosServo);
                     SettingPosition2 = MaisSettingPosition2;
+                    Wait(200);
                 }
 
                 if (!gamepad1.dpad_left && !gamepad1.dpad_right){
@@ -239,20 +258,25 @@ public class MotorConfig extends OpMode {
                     ServoELegal2.setPosition((SettingPosition2) * MaisouMenosServo);
                     SettingPosition1 = MaisSettingPosition1;
                     SettingPosition2 = MaisSettingPosition2;
+                    Wait(200);
                 }
             }
             else{
                 if (gamepad1.dpad_left) {
                     SettingPosition1 = MaisSettingPosition1;
+                    Wait(200);
                 }
 
                 if (gamepad1.dpad_right) {
                     SettingPosition2 = MaisSettingPosition2;
+                    Wait(200);
                 }
 
                 if (!gamepad1.dpad_left && !gamepad2.dpad_right) {
                     SettingPosition1 = MaisSettingPosition1;
                     SettingPosition2 = MaisSettingPosition2;
+                    Wait(200);
+
                 }
             }
             Wait(200);
@@ -263,11 +287,13 @@ public class MotorConfig extends OpMode {
                 if (gamepad1.dpad_left) {
                     SettingPosition1 = MenosSettingPosition1;
                     ServoELegal1.setPosition(SettingPosition1 * MaisouMenosServo);
+                    Wait(200);
                 }
 
                 if (gamepad1.dpad_right) {
                     SettingPosition2 = MenosSettingPosition2;
                     ServoELegal2.setPosition((SettingPosition2) * MaisouMenosServo);
+                    Wait(200);
                 }
 
                 if (!gamepad1.dpad_right && !gamepad1.dpad_left){
@@ -275,21 +301,25 @@ public class MotorConfig extends OpMode {
                 SettingPosition2 = MenosSettingPosition2;
                 ServoELegal1.setPosition(SettingPosition1 * MaisouMenosServo);
                 ServoELegal2.setPosition((SettingPosition2) * MaisouMenosServo);
+                    Wait(200);
 
               }
             }
             else{
                 if (gamepad1.dpad_left) {
                     SettingPosition1 = MenosSettingPosition1;
+                    Wait(200);
                 }
 
                 if (gamepad1.dpad_right) {
                     SettingPosition2 = MenosSettingPosition2;
+                    Wait(200);
                 }
 
                 if (!gamepad1.dpad_right && !gamepad1.dpad_left){
                     SettingPosition1 = MenosSettingPosition1;
                     SettingPosition2 = MenosSettingPosition2;
+                    Wait(200);
                 }
             }
             Wait(200);
